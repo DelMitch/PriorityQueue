@@ -80,7 +80,17 @@ void push(int val)
 // and establishes a new front
 void pop()
 {
-    // write this
+    if (head == NULL)
+    {
+        printf("Priority queue is already empty...\n");
+    }
+    else
+    {
+        node * del = head;
+        head = head->next;
+        printf("%d\n", del->data);
+        free(del);
+    }
 }
 
 // Shows value of element at the front of the PQ
