@@ -32,7 +32,7 @@ node * new_node(int val)
     return temp; 
 } 
 
-// Adds an element to the PQ, then sorts
+// Adds an element to the PQ according to priority
 void push(int val)
 {
     if(head == NULL)
@@ -108,7 +108,7 @@ int size()
     {
         node * item = head;
 
-        while (item->next != NULL)
+        while (item != NULL)
         {
             ++count;
             item = item->next;
