@@ -33,9 +33,47 @@ node * new_node(int val)
 } 
 
 // Adds an element to the PQ, then sorts
-void push(int item)
+void push(int val)
 {
-    // write this
+    if((* head) == NULL)
+    {
+        (* head)->data = val;
+        (* head)->next = NULL;
+    }
+    else
+    {
+        node * new_val = new_node(val);
+
+        node * item = head;
+        node * prev = NULL;
+
+        while ((* item) != NULL)
+        {
+            // in the case that the new value has higher priority
+            // than the current head
+            if ((* new_val)->data < (* item)->data && prev == NULL)
+            {
+                (* new_val)->next = item;
+                head = new_val;
+            }
+            // all other cases
+            else if ((* new_val)->data < (* item)->data && prev != NULL)
+            {
+                (* prev)->next = new_val;
+                if ((* item)->next != NULL)
+                {
+                    (* new_val)->next = item;
+                }
+                else
+                {
+                    (* new_val)->next = NULL;
+                }
+            }
+            
+            prev = item;
+            item = (* item)->next;
+        }
+    }
 }
 
 // Removes a value from the front of a PQ
