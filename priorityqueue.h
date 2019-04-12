@@ -15,7 +15,7 @@
 #include <malloc.h>
 
 
-struct pq_node
+typedef struct pq_node
 {
     int data;
     struct pq_node * next;
@@ -35,10 +35,10 @@ node * new_node(int val)
 // Adds an element to the PQ, then sorts
 void push(int val)
 {
-    if((* head) == NULL)
+    if(head == NULL)
     {
-        (* head)->data = val;
-        (* head)->next = NULL;
+        head->data = val;
+        head->next = NULL;
     }
     else
     {
@@ -47,31 +47,31 @@ void push(int val)
         node * item = head;
         node * prev = NULL;
 
-        while ((* item) != NULL)
+        while (item != NULL)
         {
             // in the case that the new value has higher priority
             // than the current head
-            if ((* new_val)->data < (* item)->data && prev == NULL)
+            if (new_val->data < item->data && prev == NULL)
             {
-                (* new_val)->next = item;
+                new_val->next = item;
                 head = new_val;
             }
             // all other cases
-            else if ((* new_val)->data < (* item)->data && prev != NULL)
+            else if (new_val->data < item->data && prev != NULL)
             {
-                (* prev)->next = new_val;
-                if ((* item)->next != NULL)
+                prev->next = new_val;
+                if (item->next != NULL)
                 {
-                    (* new_val)->next = item;
+                    new_val->next = item;
                 }
                 else
                 {
-                    (* new_val)->next = NULL;
+                    new_val->next = NULL;
                 }
             }
             
             prev = item;
-            item = (* item)->next;
+            item = item->next;
         }
     }
 }
@@ -86,7 +86,7 @@ void pop()
 // Shows value of element at the front of the PQ
 int front()
 {
-    return (* head)->data;
+    return head->data;
 }
 
 // Returns the size of the PQ
@@ -94,14 +94,14 @@ int size()
 {
     int count = 0;
 
-    if ((* head) != NULL)
+    if (head != NULL)
     {
         node * item = head;
 
-        while ((* item)->next != NULL)
+        while (item->next != NULL)
         {
             ++count;
-            item = (* item)->next;
+            item = item->next;
         }
     }
 
@@ -111,5 +111,5 @@ int size()
 // Returns true if the PQ is empty, false otherwise
 bool empty()
 {
-    return (* head) == NULL;
+    return head == NULL;
 }
