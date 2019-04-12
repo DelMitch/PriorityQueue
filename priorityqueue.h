@@ -11,19 +11,31 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+// Include memory allocation library
+#include <malloc.h>
+
 
 struct pq_node
 {
-    int value;
-    int priority;
+    int data;
     struct pq_node * next;
-} *head = NULL;
+} node;
 
+node * head = NULL;
 
-// Shows value of element at the front of the PQ
-int front()
+node * new_node(int val) 
+{ 
+    node * temp = (node*)malloc(sizeof(node));
+    temp->data = val;
+    temp->next = NULL;
+  
+    return temp; 
+} 
+
+// Adds an element to the PQ, then sorts
+void push(int item)
 {
-    return *head;
+    // write this
 }
 
 // Removes a value from the front of a PQ
@@ -33,10 +45,10 @@ void pop()
     // write this
 }
 
-// Adds an element to the PQ, then sorts
-void push(int item)
+// Shows value of element at the front of the PQ
+int front()
 {
-    // write this
+    return (* head);
 }
 
 // Returns the size of the PQ
@@ -49,6 +61,5 @@ int size()
 // Returns true if the PQ is empty, false otherwise
 bool empty()
 {
-    // write this
-    return (*head) == NULL;
+    return (* head) == NULL;
 }
