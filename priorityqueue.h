@@ -54,8 +54,20 @@ int front()
 // Returns the size of the PQ
 int size()
 {
-    // write this
-    return 0;
+    int count = 0;
+
+    if ((* head) != NULL)
+    {
+        node * item = head;
+
+        while ((* item)->next != NULL)
+        {
+            ++count;
+            item = (* item)->next;
+        }
+    }
+
+    return count;
 }
 
 // Returns true if the PQ is empty, false otherwise
