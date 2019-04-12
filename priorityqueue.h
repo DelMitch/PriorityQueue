@@ -12,11 +12,11 @@
 #include <stdbool.h>
 
 
-struct priority_queue
+struct pq_node
 {
     int value;
     int priority;
-    struct priority_queue * next;
+    struct pq_node * next;
 } *head = NULL;
 
 
@@ -24,7 +24,7 @@ struct priority_queue
 int front()
 {
     // write this
-    return 0;
+    return *head;
 }
 
 // Removes a value from the front of a PQ
