@@ -86,7 +86,7 @@ void pop()
 // Shows value of element at the front of the PQ
 int front()
 {
-    return (* head);
+    return (* head)->data;
 }
 
 // Returns the size of the PQ
