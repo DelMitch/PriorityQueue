@@ -23,7 +23,6 @@ struct pq_node
 // Shows value of element at the front of the PQ
 int front()
 {
-    // write this
     return *head;
 }
 
@@ -51,5 +50,5 @@ int size()
 bool empty()
 {
     // write this
-    return false;
+    return (*head) == NULL;
 }
