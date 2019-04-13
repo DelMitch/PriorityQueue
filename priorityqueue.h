@@ -21,8 +21,6 @@ typedef struct pq_node
     struct pq_node * next;
 } node;
 
-//node * head = NULL;
-
 node * new_node(int val) 
 { 
     node * temp = (node*)malloc(sizeof(node));
@@ -82,7 +80,7 @@ void push(node** head, int val)
 // and establishes a new front
 void pop(node** head)
 {
-    if (head != NULL)
+    if ((* head) != NULL)
     {
         node * del = (* head);
         (* head) = del->next;
@@ -102,7 +100,7 @@ int size(node** head)
 {
     int count = 0;
 
-    if (head != NULL)
+    if ((* head) != NULL)
     {
         node * item = (* head);
     
