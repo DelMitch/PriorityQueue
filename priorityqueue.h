@@ -79,15 +79,10 @@ void push(node** head, int val)
 // and establishes a new front
 void pop(node** head)
 {
-    if (head == NULL)
-    {
-        printf("Priority queue is already empty...\n");
-    }
-    else
+    if (head != NULL)
     {
         node * del = (* head);
         (* head) = (* head)->next;
-        printf("%d\n", del->data);
         free(del);
     }
 }
