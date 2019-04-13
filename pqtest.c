@@ -95,6 +95,21 @@ void push_tests(int t_vals[])
         printf("FAIL\n\n");
     }
     
+    // Success when head == 7, tail == 7, and size has increased by 1
+    printf("ASSERT: push(&pq1, 7) a second time and there are now two 7s\n");
+    ++test_num;
+    pq1_size = size(&pq1);
+    push(&pq1, 7);
+    if (front(&pq1) == 7 && pq1->next->data == 7 && size(&pq1) == pq1_size + 1)
+    {
+        printf("PASS\n\n");
+        ++pass_num;
+    }
+    else
+    {
+        printf("FAIL\n\n");
+    }
+    
     // Success when tail == 9 and size has increased by 1
     printf("ASSERT: push(&pq0, 9) and 9 is now tail\n");
     ++test_num;
