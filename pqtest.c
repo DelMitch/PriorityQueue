@@ -19,7 +19,7 @@
 //
 // PQs may be created with the head as NULL
 // and with the head containing valid data
-void creation_tests()
+void creation_tests(int t_vals[])
 {
     int pass_num = 0, test_num = 0;
 
@@ -49,13 +49,15 @@ void creation_tests()
     }
 
     printf("=== Total Passed: %i/%i ===\n\n\n", pass_num, test_num);
+    t_vals[0] = pass_num;
+    t_vals[1] = test_num;
 }
 
 // Tests the push()function
 //
 // Can push an element that becomes highest,
 // lowest, or middlin' priority
-void push_tests()
+void push_tests(int t_vals[])
 {
     int pass_num = 0, test_num = 0;
     
@@ -148,10 +150,12 @@ void push_tests()
     }
 
     printf("=== Total Passed: %i/%i ===\n\n\n", pass_num, test_num);
+    t_vals[0] = pass_num;
+    t_vals[1] = test_num;
 }
 
 // Tests the pop() function
-void pop_tests()
+void pop_tests(int t_vals[])
 {
     int pass_num = 0, test_num = 0;
     
@@ -201,13 +205,15 @@ void pop_tests()
     }
 
     printf("=== Total Passed: %i/%i ===\n\n\n", pass_num, test_num);
+    t_vals[0] = pass_num;
+    t_vals[1] = test_num;
 }
 
 // Tests the front() function
 //
 // Front of the PQ is the highest priority item,
 // in this case: the lowest integer
-void front_tests()
+void front_tests(int t_vals[])
 {
     int pass_num = 0, test_num = 0;
 
@@ -291,13 +297,15 @@ void front_tests()
     }
 
     printf("=== Total Passed: %i/%i ===\n\n\n", pass_num, test_num);
+    t_vals[0] = pass_num;
+    t_vals[1] = test_num;
 }
 
 // Tests the size() functions
 //
 // Size of a PQ is the number of non-NULL nodes,
 // cannot be negative
-void size_tests()
+void size_tests(int t_vals[])
 {
     int pass_num = 0, test_num = 0;
     
@@ -355,13 +363,15 @@ void size_tests()
     }
 
     printf("=== Total Passed: %i/%i ===\n\n\n", pass_num, test_num);
+    t_vals[0] = pass_num;
+    t_vals[1] = test_num;
 }
 
 // Tests the empty() functions
 //
 // PQs created as NULL and popped until the head
 // is NULL are empty
-void empty_tests()
+void empty_tests(int t_vals[])
 {
     int pass_num = 0, test_num = 0;
     
@@ -405,28 +415,48 @@ void empty_tests()
     }
 
     printf("=== Total Passed: %i/%i ===\n\n\n", pass_num, test_num);
+    t_vals[0] = pass_num;
+    t_vals[1] = test_num;
 }
 
 
 int main ()
 {
+    int passed = 0, tests = 0;
+
+    int t_vals[2];
+
     printf(".:: PQ CREATION TESTING START ::.\n\n");
-    creation_tests();
+    creation_tests(t_vals);
+    passed += t_vals[0];
+    tests += t_vals[1];
 
     printf(".:: PQ PUSH TESTING START ::.\n\n");
-    push_tests();
+    push_tests(t_vals);
+    passed += t_vals[0];
+    tests += t_vals[1];
 
     printf(".:: PQ POP TESTING START ::.\n\n");
-    pop_tests();
+    pop_tests(t_vals);
+    passed += t_vals[0];
+    tests += t_vals[1];
 
     printf(".:: PQ FRONT TESTING START ::.\n\n");
-    front_tests();
+    front_tests(t_vals);
+    passed += t_vals[0];
+    tests += t_vals[1];
 
     printf(".:: PQ SIZE TESTING START ::.\n\n");
-    size_tests();
+    size_tests(t_vals);
+    passed += t_vals[0];
+    tests += t_vals[1];
 
     printf(".:: PQ EMPTY TESTING START ::.\n\n");
-    empty_tests();
+    empty_tests(t_vals);
+    passed += t_vals[0];
+    tests += t_vals[1];
+
+    printf("=== Tests Passing: %i/%i ===\n\n", passed, tests);
 
     return 0;
 }
