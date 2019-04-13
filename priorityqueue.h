@@ -83,6 +83,7 @@ void pop(node** head)
     {
         node * del = (* head);
         (* head) = (* head)->next;
+        
         free(del);
     }
 }
@@ -115,5 +116,5 @@ int size(node** head)
 // Returns true if the PQ is empty, false otherwise
 bool empty(node** head)
 {
-    return head == NULL;
+    return (* head) == NULL;
 }
