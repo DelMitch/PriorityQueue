@@ -182,6 +182,23 @@ void pop_tests()
     {
         printf("FAIL: PQ is NOT still NULL after pop attempt\n\n");
     }
+    
+    printf("ASSERT: pq0 != NULL after 4, 5, 6, & 2 are pushed and one pop is performed\n");
+    ++test_num;
+    push(&pq0, 4);
+    push(&pq0, 5);
+    push(&pq0, 6);
+    push(&pq0, 2);
+    pop(&pq0);
+    if (pq0 != NULL)
+    {
+        printf("PASS: PQ is NOT NULL after popping\n\n");
+        ++pass_num;
+    }
+    else
+    {
+        printf("FAIL: PQ is NULL after popping\n\n");
+    }
 
     printf("=== Total Passed: %i/%i ===\n\n\n", pass_num, test_num);
 }
