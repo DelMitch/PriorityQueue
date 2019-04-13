@@ -400,6 +400,20 @@ void size_tests(int t_vals[])
     {
         printf("FAIL\n\n");
     }
+    
+    // Success when size == 0
+    printf("ASSERT: size(&pq1) == 0 after another pop(&pq1)\n");
+    ++test_num;
+    pop(&pq1);
+    if (size(&pq1) == 0)
+    {
+        printf("PASS\n\n");
+        ++pass_num;
+    }
+    else
+    {
+        printf("FAIL\n\n");
+    }
 
     printf("=== Total Passed: %i/%i ===\n\n\n", pass_num, test_num);
     t_vals[0] = pass_num;
