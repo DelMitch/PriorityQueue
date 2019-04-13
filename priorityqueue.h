@@ -46,31 +46,34 @@ void push(node** head, int val)
         node * item = (* head);
         node * prev = NULL;
 
-        while (item != NULL)
+        // in the case that the new value has higher priority
+        // than the current head
+        if (new_val->data < (* head)->data)
         {
-            // in the case that the new value has higher priority
-            // than the current head
-            if (new_val->data < item->data && prev == NULL)
+            new_val->next = (* head);
+            (* head) = new_val;
+        }
+        else
+        {
+            while (item != NULL)
             {
-                new_val->next = item;
-                (* head) = new_val;
-            }
-            // all other cases
-            else if (new_val->data < item->data && prev != NULL)
-            {
-                prev->next = new_val;
-                if (item->next != NULL)
+                // in the case that the new value belongs somewhere
+                // in the middle
+                if (new_val->data < item->data && prev != NULL)
                 {
+                    prev->next = new_val;
                     new_val->next = item;
                 }
-                else
+                // in the case that the new value is larger than every
+                // other value in the PQ
+                else if (new_val->data > item->data && item->next == NULL)
                 {
-                    new_val->next = NULL;
+                    item->next = new_val;
                 }
+                
+                prev = item;
+                item = item->next;
             }
-            
-            prev = item;
-            item = item->next;
         }
     }
 }
@@ -82,7 +85,7 @@ void pop(node** head)
     if (head != NULL)
     {
         node * del = (* head);
-        (* head) = (* head)->next;
+        (* head) = del->next;
         
         free(del);
     }
@@ -102,7 +105,7 @@ int size(node** head)
     if (head != NULL)
     {
         node * item = (* head);
-
+    
         while (item != NULL)
         {
             ++count;
