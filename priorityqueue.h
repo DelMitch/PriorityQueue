@@ -61,7 +61,9 @@ void push(node** head, int val)
             while (item != NULL)
             {
                 // in the case that the new value belongs somewhere
-                // in the middle
+                // in the middle; the use of less than makes it so
+                // any duplicate values inserted will be put after
+                // any existing value that the pushed value equals
                 if (new_val->data < item->data && prev != NULL)
                 {
                     prev->next = new_val;
@@ -69,9 +71,10 @@ void push(node** head, int val)
                 }
                 // in the case that the new value is larger than every
                 // other value in the PQ
-                else if (new_val->data > item->data && item->next == NULL)
+                else if (new_val->data >= item->data && item->next == NULL)
                 {
                     item->next = new_val;
+                    break;
                 }
                 
                 prev = item;
