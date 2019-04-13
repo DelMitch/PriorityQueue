@@ -26,7 +26,8 @@ void creation_tests(int t_vals[])
     // Success when PQ is created with initial head value
     printf("ASSERT: node * pq = new_node(4) successfully creates pq with head == 4\n");
     ++test_num;
-    if (new_node(4))
+    node * pq0 = new_node(4);
+    if (pq0 && pq0->data == 4)
     {
         printf("PASS\n\n");
         ++pass_num;
@@ -39,8 +40,8 @@ void creation_tests(int t_vals[])
     // Success when PQ is created without an initial head value
     printf("ASSERT: node * pq = NULL successfully creates pq == NULL\n");
     ++test_num;
-    node * pq = NULL;
-    if (pq == NULL)
+    node * pq1 = NULL;
+    if (pq1 == NULL)
     {
         printf("PASS\n\n");
         ++pass_num;
