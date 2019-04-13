@@ -4,6 +4,11 @@
  ******************************
  * Header file for a priority
  * queue that holds integers
+ ******************************
+ * This file contains the implementation for a
+ * Priority Queue data structure that holds
+ * integers and for which the highest priority
+ * integer is the lowest in value
  *****************************/
 
 // Include std libraries
