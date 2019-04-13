@@ -48,52 +48,148 @@ void creation_tests()
         printf("FAIL: priority queue NOT created with head == NULL\n\n");
     }
 
-    printf("\nTotal Passed: %i/%i\n\n", pass_num, test_num);
+    printf("=== Total Passed: %i/%i ===\n\n\n", pass_num, test_num);
 }
 
-// Tests the push() and pop() functions
+// Tests the push()function
+//
+// Can push an element that becomes highest,
+// lowest, or middlin' priority
 void push_tests()
 {
     int pass_num = 0, test_num = 0;
     
-    printf("ASSERT: front(&pq0) == 4 after node * pq0 = new_node(4)\n");
+    printf("ASSERT: push(&pq0, 3) after node * pq0 = new_node(4)\n");
     ++test_num;
     node * pq0 = new_node(4);
-    if (front(&pq0) == 4)
+    int pq0_size = size(&pq0);
+    push(&pq0, 3);
+    if (front(&pq0) == 3 && size(&pq0) == pq0_size + 1)
     {
-        printf("PASS: highest priority element is 4 after creation with new_node\n\n");
+        printf("PASS: head->data == 3 when pushed in after creation with new_node\n\n");
         ++pass_num;
     }
     else
     {
-        printf("FAIL: highest priority element is NOT 4 after creation with new_node\n\n");
+        printf("FAIL: head->data != 3 when pushed in after creation with new_node\n\n");
+    }
+    
+    printf("ASSERT: push(&pq0, 7) after node * pq1 = NULL\n");
+    ++test_num;
+    node * pq1 = NULL;
+    int pq1_size = size(&pq1);
+    push(&pq1, 7);
+    if (front(&pq1) == 7 && size(&pq1) == pq1_size + 1)
+    {
+        printf("PASS: head->data == 7 when after creation with NULL\n\n");
+        ++pass_num;
+    }
+    else
+    {
+        printf("FAIL: head->data != 7 when after creation with NULL\n\n");
+    }
+    
+    printf("ASSERT: push(&pq0, 9) inserted as tail\n");
+    ++test_num;
+    pq0_size = size(&pq0);
+    push(&pq0, 9);
+    int pq0_size_post = size(&pq0);
+    while(pq0->next != NULL)
+    {
+        pq0 = pq0->next;
+    }
+    if (pq0->data == 9 && pq0_size_post == pq0_size + 1)
+    {
+        printf("PASS: tail->data == 9 after pushing\n\n");
+        ++pass_num;
+    }
+    else
+    {
+        printf("FAIL: tail->data != 9 after pushing\n\n");
+    }
+    
+    printf("ASSERT: push(&pq0, 6) inserted in middle\n");
+    ++test_num;
+    node * pq2 = new_node(4);
+    push(&pq2, 3);
+    push(&pq2, 9);
+    int pq2_size = size(&pq2);
+    push(&pq2, 6);
+    int pq2_size_post = size(&pq2);
+    while(pq2->next != NULL && pq2->data < 6)
+    {
+        pq2 = pq2->next;
+    }
+    if (pq2->data == 6 && pq2_size_post == pq2_size + 1)
+    {
+        printf("PASS: mid->data == 6 after pushing\n\n");
+        ++pass_num;
+    }
+    else
+    {
+        printf("FAIL: mid->data != 6 after pushing\n\n");
+    }
+    
+    printf("ASSERT: data in expected order -- 3, 4, 6, 9\n");
+    ++test_num;
+    node * pq3 = new_node(4);
+    push(&pq3, 3);
+    push(&pq3, 9);
+    push(&pq3, 6);
+    if (pq3->data == 3 && pq3->next->data == 4 &&
+    pq3->next->next->data == 6 && pq3->next->next->next->data == 9)
+    {
+        printf("PASS: data is in expected order\n\n");
+        ++pass_num;
+    }
+    else
+    {
+        printf("FAIL: data is NOT in expected order\n\n");
     }
 
-    printf("\nTotal Passed: %i/%i\n\n", pass_num, test_num);
+    printf("=== Total Passed: %i/%i ===\n\n\n", pass_num, test_num);
 }
 
-// Tests the push() and pop() functions
+// Tests the pop() function
 void pop_tests()
 {
     int pass_num = 0, test_num = 0;
     
-    printf("ASSERT: front(&pq0) == 4 after node * pq0 = new_node(4)\n");
+    printf("ASSERT: pq0 == NULL after node * pq0 = new_node(4) is popped\n");
     ++test_num;
     node * pq0 = new_node(4);
-    if (front(&pq0) == 4)
+    pop(&pq0);
+    if (pq0 == NULL)
     {
-        printf("PASS: highest priority element is 4 after creation with new_node\n\n");
+        printf("PASS: PQ is NULL after popping\n\n");
         ++pass_num;
     }
     else
     {
-        printf("FAIL: highest priority element is NOT 4 after creation with new_node\n\n");
+        printf("FAIL: PQ is NOT NULL after popping\n\n");
+    }
+    
+    printf("ASSERT: pq0 == NULL after pop is attempled on node * pq0 = NULL\n");
+    ++test_num;
+    node * pq1 = NULL;
+    pop(&pq1);
+    if (pq1 == NULL)
+    {
+        printf("PASS: PQ is still NULL after pop attempt\n\n");
+        ++pass_num;
+    }
+    else
+    {
+        printf("FAIL: PQ is NOT still NULL after pop attempt\n\n");
     }
 
-    printf("\nTotal Passed: %i/%i\n\n", pass_num, test_num);
+    printf("=== Total Passed: %i/%i ===\n\n\n", pass_num, test_num);
 }
 
-// Tests the front(), size(), and empty() functions
+// Tests the front() function
+//
+// Front of the PQ is the highest priority item,
+// in this case: the lowest integer
 void front_tests()
 {
     int pass_num = 0, test_num = 0;
@@ -117,12 +213,12 @@ void front_tests()
     push(&pq1, 5);
     if (front(&pq1) == 5)
     {
-        printf("PASS: highest priority element is 4 after creation with new_node\n\n");
+        printf("PASS: highest priority element is 5 after creation with new_node\n\n");
         ++pass_num;
     }
     else
     {
-        printf("FAIL: highest priority element is NOT 4 after creation with new_node\n\n");
+        printf("FAIL: highest priority element is NOT 5 after creation with new_node\n\n");
     }
 
     printf("ASSERT: front(&pq0) == 4 after push(&pq0, 7)\n");
@@ -177,20 +273,77 @@ void front_tests()
         printf("FAIL: head is NOT NULL after popping\n\n");
     }
 
-    printf("\nTotal Passed: %i/%i\n\n", pass_num, test_num);
+    printf("=== Total Passed: %i/%i ===\n\n\n", pass_num, test_num);
 }
 
-// Tests the push() and pop() functions
+// Tests the size() functions
+//
+// Size of a PQ is the number of non-NULL nodes,
+// cannot be negative
 void size_tests()
 {
     int pass_num = 0, test_num = 0;
     
+    printf("ASSERT: size(&pq0) == 0 after node * pq0 = NULL\n");
+    ++test_num;
+    node * pq0 = NULL;
+    if (size(&pq0) == 0)
+    {
+        printf("PASS: size is 0 after creation with NULL\n\n");
+        ++pass_num;
+    }
+    else
+    {
+        printf("FAIL: size is NOT 0 after creation with NULL\n\n");
+    }
     
+    printf("ASSERT: size(&pq0) == 2 after push(&pq0, 8) and push(&pq0, 3)\n");
+    ++test_num;
+    push(&pq0, 8);
+    push(&pq0, 3);
+    if (size(&pq0) == 2)
+    {
+        printf("PASS: size is 2 after pushing two integers\n\n");
+        ++pass_num;
+    }
+    else
+    {
+        printf("FAIL: size is NOT 2 after pushing two integers\n\n");
+    }
 
-    printf("\nTotal Passed: %i/%i\n\n", pass_num, test_num);
+    printf("ASSERT: size(&pq1) == 1 after node * pq1 = new_node(4)\n");
+    ++test_num;
+    node * pq1 = new_node(4);
+    if (size(&pq1) == 1)
+    {
+        printf("PASS: size is 1 after creation with new_node\n\n");
+        ++pass_num;
+    }
+    else
+    {
+        printf("FAIL: size is NOT 1 after creation with new_node\n\n");
+    }
+    
+    printf("ASSERT: size(&pq1) == 0 after pop(&pq1)\n");
+    ++test_num;
+    pop(&pq1);
+    if (size(&pq1) == 0)
+    {
+        printf("PASS: size is 0 TRUE after popping\n\n");
+        ++pass_num;
+    }
+    else
+    {
+        printf("FAIL: size is NOT 0 after popping\n\n");
+    }
+
+    printf("=== Total Passed: %i/%i ===\n\n\n", pass_num, test_num);
 }
 
-// Tests the push() and pop() functions
+// Tests the empty() functions
+//
+// PQs created as NULL and popped until the head
+// is NULL are empty
 void empty_tests()
 {
     int pass_num = 0, test_num = 0;
@@ -234,7 +387,7 @@ void empty_tests()
         printf("FAIL: empty is FALSE after popping\n\n");
     }
 
-    printf("\nTotal Passed: %i/%i\n\n", pass_num, test_num);
+    printf("=== Total Passed: %i/%i ===\n\n\n", pass_num, test_num);
 }
 
 
@@ -242,27 +395,21 @@ int main ()
 {
     printf(".:: PQ CREATION TESTING START ::.\n\n");
     creation_tests();
-    printf(".:: PQ CREATION TESTING END ::.\n\n");
 
-    printf("\n\n.:: PQ PUSH TESTING START ::.\n\n");
+    printf(".:: PQ PUSH TESTING START ::.\n\n");
     push_tests();
-    printf(".:: PQ PUSH TESTING END ::.\n\n");
 
-    printf("\n\n.:: PQ POP TESTING START ::.\n\n");
+    printf(".:: PQ POP TESTING START ::.\n\n");
     pop_tests();
-    printf(".:: PQ POP TESTING END ::.\n\n");
 
-    printf("\n\n.:: PQ FRONT TESTING START ::.\n\n");
+    printf(".:: PQ FRONT TESTING START ::.\n\n");
     front_tests();
-    printf(".:: PQ FRONT TESTING END ::.\n\n");
 
-    printf("\n\n.:: PQ SIZE TESTING START ::.\n\n");
+    printf(".:: PQ SIZE TESTING START ::.\n\n");
     size_tests();
-    printf(".:: PQ SIZE TESTING END ::.\n\n");
 
-    printf("\n\n.:: PQ EMPTY TESTING START ::.\n\n");
+    printf(".:: PQ EMPTY TESTING START ::.\n\n");
     empty_tests();
-    printf(".:: PQ EMPTY TESTING END ::.\n\n");
 
     return 0;
 }
