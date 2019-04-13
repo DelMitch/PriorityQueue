@@ -21,7 +21,7 @@ typedef struct pq_node
     struct pq_node * next;
 } node;
 
-node * head = NULL;
+//node * head = NULL;
 
 node * new_node(int val) 
 { 
@@ -33,18 +33,18 @@ node * new_node(int val)
 } 
 
 // Adds an element to the PQ according to priority
-void push(int val)
+void push(node** head, int val)
 {
     if(head == NULL)
     {
-        head->data = val;
-        head->next = NULL;
+        (* head)->data = val;
+        (* head)->next = NULL;
     }
     else
     {
         node * new_val = new_node(val);
 
-        node * item = head;
+        node * item = (* head);
         node * prev = NULL;
 
         while (item != NULL)
@@ -54,7 +54,7 @@ void push(int val)
             if (new_val->data < item->data && prev == NULL)
             {
                 new_val->next = item;
-                head = new_val;
+                (* head) = new_val;
             }
             // all other cases
             else if (new_val->data < item->data && prev != NULL)
@@ -78,7 +78,7 @@ void push(int val)
 
 // Removes a value from the front of a PQ
 // and establishes a new front
-void pop()
+void pop(node** head)
 {
     if (head == NULL)
     {
@@ -86,27 +86,27 @@ void pop()
     }
     else
     {
-        node * del = head;
-        head = head->next;
+        node * del = (* head);
+        (* head) = (* head)->next;
         printf("%d\n", del->data);
         free(del);
     }
 }
 
 // Shows value of element at the front of the PQ
-int front()
+int front(node** head)
 {
-    return head->data;
+    return (* head)->data;
 }
 
 // Returns the size of the PQ
-int size()
+int size(node** head)
 {
     int count = 0;
 
     if (head != NULL)
     {
-        node * item = head;
+        node * item = (* head);
 
         while (item != NULL)
         {
@@ -119,7 +119,7 @@ int size()
 }
 
 // Returns true if the PQ is empty, false otherwise
-bool empty()
+bool empty(node** head)
 {
     return head == NULL;
 }
