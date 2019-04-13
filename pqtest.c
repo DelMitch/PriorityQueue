@@ -185,18 +185,7 @@ void size_tests()
 {
     int pass_num = 0, test_num = 0;
     
-    printf("ASSERT: front(&pq0) == 4 after node * pq0 = new_node(4)\n");
-    ++test_num;
-    node * pq0 = new_node(4);
-    if (front(&pq0) == 4)
-    {
-        printf("PASS: highest priority element is 4 after creation with new_node\n\n");
-        ++pass_num;
-    }
-    else
-    {
-        printf("FAIL: highest priority element is NOT 4 after creation with new_node\n\n");
-    }
+    
 
     printf("\nTotal Passed: %i/%i\n\n", pass_num, test_num);
 }
@@ -219,17 +208,17 @@ void empty_tests()
         printf("FAIL: empty is FALSE after creation with NULL\n\n");
     }
 
-    printf("ASSERT: empty(&pq1) == false after node * pq1 = new_node(4)\n");
+    printf("ASSERT: !empty(&pq1) == true after node * pq1 = new_node(4)\n");
     ++test_num;
     node * pq1 = new_node(4);
     if (!empty(&pq1))
     {
-        printf("PASS: empty is FALSE after creation with new_node\n\n");
+        printf("PASS: !empty is TRUE after creation with new_node\n\n");
         ++pass_num;
     }
     else
     {
-        printf("FAIL:  empty is TRUE after creation with new_node\n\n");
+        printf("FAIL: !empty is FALSE after creation with new_node\n\n");
     }
     
     printf("ASSERT: empty(&pq1) == false after pop(&pq1)\n");
