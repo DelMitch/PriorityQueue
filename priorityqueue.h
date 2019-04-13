@@ -35,10 +35,9 @@ node * new_node(int val)
 // Adds an element to the PQ according to priority
 void push(node** head, int val)
 {
-    if(head == NULL)
+    if((* head) == NULL)
     {
-        (* head)->data = val;
-        (* head)->next = NULL;
+        (* head) = new_node(val);
     }
     else
     {
