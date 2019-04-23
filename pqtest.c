@@ -155,14 +155,14 @@ void push_tests(int t_vals[])
     }
     
     // Success when data is in the correctly prioritized order (3->4->6->9)
-    printf("ASSERT: pq3 data order is (3->4->6->9) after multiple values pushed\n");
+    printf("ASSERT: pq3 data is (3->4->6->9) after multiple values pushed and size == 4\n");
     ++test_num;
     node * pq3 = new_node(4);
     push(&pq3, 3);
     push(&pq3, 9);
     push(&pq3, 6);
     if (pq3->data == 3 && pq3->next->data == 4 &&
-    pq3->next->next->data == 6 && pq3->next->next->next->data == 9)
+    pq3->next->next->data == 6 && pq3->next->next->next->data == 9 && size(&pq3) == 4)
     {
         printf("PASS\n\n");
         ++pass_num;
@@ -171,6 +171,44 @@ void push_tests(int t_vals[])
     {
         printf("FAIL\n\n");
     }
+    
+    // Success when data is in the correctly prioritized order (3->4->6->9)
+    printf("ASSERT: pq4, created with head, data is (2->3->4->5) after pushes and size == 4\n");
+    ++test_num;
+    node * pq4 = new_node(2);
+    push(&pq4, 4);
+    push(&pq4, 5);
+    push(&pq4, 3);
+    if (pq4->data == 2 && pq4->next->data == 3 &&
+    pq4->next->next->data == 4 && pq4->next->next->next->data == 5 && size(&pq4) == 4)
+    {
+        printf("PASS\n\n");
+        ++pass_num;
+    }
+    else
+    {
+        printf("FAIL\n\n");
+    }
+    
+    // Success when data is in the correctly prioritized order (3->4->6->9)
+    printf("ASSERT: pq5, created NULL, data is (2->3->4->5) after pushes and size == 4\n");
+    ++test_num;
+    node * pq5 = NULL;
+    push(&pq5, 2);
+    push(&pq5, 4);
+    push(&pq5, 5);
+    push(&pq5, 3);
+    if (pq5->data == 2 && pq5->next->data == 3 &&
+    pq5->next->next->data == 4 && pq5->next->next->next->data == 5 && size(&pq5) == 4)
+    {
+        printf("PASS\n\n");
+        ++pass_num;
+    }
+    else
+    {
+        printf("FAIL\n\n");
+    }
+
 
     printf("=== Total Passed: %i/%i ===\n\n\n", pass_num, test_num);
     t_vals[0] = pass_num;
