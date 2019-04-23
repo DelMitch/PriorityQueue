@@ -68,6 +68,7 @@ void push(node** head, int val)
                 {
                     prev->next = new_val;
                     new_val->next = item;
+                    break;
                 }
                 // in the case that the new value is larger than every
                 // other value in the PQ
